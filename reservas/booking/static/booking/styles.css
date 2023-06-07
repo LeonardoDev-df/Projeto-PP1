@@ -1,0 +1,51 @@
+/* styles.css */
+
+
+/* Estilize o contêiner principal */
+#content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Estilize o formulário de criação de reserva */
+form {
+    margin-bottom: 20px;
+  }
+
+  /* Estilize a tabela de listagem de reservas */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  /* Estilize os links de edição e deleção */
+  a.edit-link,
+  a.delete-link {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #2196f3;
+    color: white;
+    text-decoration: none;
+    margin-right: 5px;
+  }
+  
+  /* Adicione regras de layout responsivo */
+  @media screen and (max-width: 600px) {
+    #content {
+      max-width: 100%;
+      padding: 10px;
+    }
+  }
+  
+  @media screen and (max-width: 400px) {
+    input[type="text"],
+    input[type="date"],
+    input[type="time"] {
+      width: 100%;
+      padding: 5px;
+    }
+  }
+  
+  

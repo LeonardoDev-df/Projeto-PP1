@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <h1>Listagem de Reservas</h1>
+
+    <style>
+        /* Estilos para centralizar o conteúdo */
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Estilos para a tabela de listagem de reservas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        /* Estilos para os links de edição e deleção */
+        a.edit-link,
+        a.delete-link {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #2196f3;
+            color: white;
+            text-decoration: none;
+            margin-right: 5px;
+        }
+    </style>
+    
+
+    <div class="content-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Data</th>
+                    <th>Horário</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reserva in reservas %}
+                    <tr>
+                        <td>{{ reserva.nome }}</td>
+                        <td>{{ reserva.data }}</td>
+                        <td>{{ reserva.horario }}</td>
+                        <td>
+                            <a href="{% url 'editar_reserva' reserva.pk %}" class="edit-link">Editar</a>
+                            <a href="{% url 'deletar_reserva' reserva.pk %}" class="delete-link">Deletar</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4">Nenhuma reserva encontrada.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <a href="{% url 'criar_reserva' %}" class="create-link">Criar Reserva</a>
+    </div>
+{% endblock %}
