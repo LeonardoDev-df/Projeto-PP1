@@ -1,5 +1,7 @@
 # Projeto-PP1
 
+SISTEMAS DE RESERVAS PARA UM RESTAURANTE
+
 python -m venv env
 
 #caso de erro abra powersheel como admin e usa este código
