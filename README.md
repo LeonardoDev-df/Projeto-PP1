@@ -2,21 +2,20 @@
 
 SISTEMAS DE RESERVAS PARA UM RESTAURANTE
 
+
+#entrar na pasta
+cd reservas
+
 #instala máquina virtual
 python -m venv env
-
-#entra na pasta env
-cd env
 
 #caso de erro abra powersheel como admin e usa este código
 --------------------------------------------------------------
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned 
 
 #ativa máquina virtual
+-------------------------------------------------------------
 .\env\Scripts\Activate\.bat
-
-#entrar na pasta
-cd reservas
 
 #instalando django
  pip install django
