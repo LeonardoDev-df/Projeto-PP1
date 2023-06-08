@@ -2,7 +2,11 @@
 
 SISTEMAS DE RESERVAS PARA UM RESTAURANTE
 
+#instala máquina virtual
 python -m venv env
+
+#entra na pasta env
+cd env
 
 #caso de erro abra powersheel como admin e usa este código
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned 
