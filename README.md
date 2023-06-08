@@ -9,6 +9,7 @@ python -m venv env
 cd env
 
 #caso de erro abra powersheel como admin e usa este código
+--------------------------------------------------------------
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned 
 
 #ativa máquina virtual
