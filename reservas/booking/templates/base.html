@@ -1,16 +1,19 @@
-<!-- base.html -->
-{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sistema de Reservas</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'booking/styles.css' %}">
+  <title>Sistema de Reservas</title>
+  <style>
+    body {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+  </style>
 </head>
 <body>
-    <div id="content">
-        {% block content %}
-        {% endblock %}
-    </div>
+  <h1>Sistema de Reservas</h1>
+  <hr>
+  {% block content %}
+  {% endblock %}
 </body>
 </html>

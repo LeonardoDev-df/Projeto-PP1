@@ -4,4 +4,4 @@ from .models import Reserva
 class ReservaForm(forms.ModelForm):
     class Meta:
         model = Reserva
-        fields = ('nome', 'data', 'horario')
+        fields = ('nome', 'email', 'numero_pessoas', 'data', 'horario', 'mesas_reservadas')

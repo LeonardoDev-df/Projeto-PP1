@@ -33,34 +33,45 @@
     
 
     <div class="content-container">
+      <a href="{% url 'criar_reserva' %}">Criar Nova Reserva</a> <!-- Link para criar nova reserva -->
+
+      {% if reservas %}
         <table>
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Data</th>
-                    <th>Horário</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for reserva in reservas %}
-                    <tr>
-                        <td>{{ reserva.nome }}</td>
-                        <td>{{ reserva.data }}</td>
-                        <td>{{ reserva.horario }}</td>
-                        <td>
-                            <a href="{% url 'editar_reserva' reserva.pk %}" class="edit-link">Editar</a>
-                            <a href="{% url 'deletar_reserva' reserva.pk %}" class="delete-link">Deletar</a>
-                        </td>
-                    </tr>
-                {% empty %}
-                    <tr>
-                        <td colspan="4">Nenhuma reserva encontrada.</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Horário</th>
+              <th>Status</th>
+              <th>Nome do Cliente</th>
+              <th>Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for reserva in reservas %}
+              <tr>
+                <td>{{ reserva.data }}</td>
+                <td>{{ reserva.horario }}</td>
+                <td>{{ reserva.status }}</td>
+                <td>{{ reserva.cliente.nome }}</td>
+                <td>
+                  {% if reserva.status == 'confirmada' %}
+                    {% if reserva.chegada_confirmada %}
+                      Chegada confirmada
+                    {% else %}
+                      <a href="{% url 'confirmar_chegada' reserva.id %}">Confirmar Chegada</a>
+                    {% endif %}
+                  {% endif %}
+                </td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="5">Nenhuma reserva encontrada.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
         </table>
-        
-        <a href="{% url 'criar_reserva' %}" class="create-link">Criar Reserva</a>
+      {% else %}
+        <p>Nenhuma reserva encontrada.</p>
+      {% endif %}
     </div>
 {% endblock %}

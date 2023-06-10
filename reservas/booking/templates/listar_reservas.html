@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <h2>Lista de Reservas</h2>
+  
+  <style>
+        /* Estilos para centralizar o conteúdo */
+        body{
+          width: 150%;
+        }
+       
+        .content-container {
+            display: flex;
+          
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Estilos para a tabela de listagem de reservas */
+        table {
+            width: 170%;
+            border-collapse: collapse;
+            margin-bottom: 50px;
+        }
+
+        /* Estilos para os links de edição e deleção */
+        a.edit-link,
+        a.delete-link {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #2196f3;
+            color: white;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+    </style>
+    
+
+    <div class="content-container">
+      <a href="{% url 'criar_reserva' %}">Criar Nova Reserva</a> <!-- Link para criar nova reserva -->
+
+      {% if reservas %}
+        <table>
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Horário</th>
+              <th>Status</th>
+              <th>Nome do Cliente</th>
+              <th>Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for reserva in reservas %}
+              <tr>
+                <td>{{ reserva.data }}</td>
+                <td>{{ reserva.horario }}</td>
+                <td>{{ reserva.status }}</td>
+                <td>{{ reserva.nome }}</td>
+                <td>
+                  <a href="{% url 'confirmar_chegada' reserva.id %}"  class="edit-link">Confirmar Chegada</a>
+                </td>
+                <td>
+                  <a href="{% url 'cancelar_reserva' reserva.id %}" class="edit-link">Cancelar Reserva</a>
+                </td>
+               
+
+                <td>
+                  <a href="{% url 'editar_reserva' reserva.pk %}" class="edit-link">Editar</a>
+                  <a href="{% url 'deletar_reserva' reserva.pk %}" class="delete-link">Deletar</a>
+              </td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="5">Nenhuma reserva encontrada.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p>Nenhuma reserva encontrada.</p>
+      {% endif %}
+    </div>
+{% endblock %}
+
+

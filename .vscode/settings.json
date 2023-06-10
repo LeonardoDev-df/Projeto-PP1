@@ -2,5 +2,9 @@
     "windowsTerminal.settingsJsonPath": "",
     "python.linting.pylintArgs": [
         "--load-plugins=pylint_django"
-    ]
+    ],
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "python.formatting.provider": "none"
 }
