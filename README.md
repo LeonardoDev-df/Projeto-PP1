@@ -14,7 +14,6 @@ _____________________________________________________________________________
 * aviso quando estiver lotado ou sem mesas disponíveis
 * horários de reservas proibido entre 00:00 e 10:00 manhã
 _____________________________________________________________________________
-#vídeo apresentação
 https://github.com/LeonardoDev-df/Projeto-PP1/assets/69646199/8f5a5ad2-4692-4750-bbb7-d40ca9e11d98
 
 #entrar na pasta
