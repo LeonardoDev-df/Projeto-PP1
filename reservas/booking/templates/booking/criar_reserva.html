@@ -1,11 +1,22 @@
 {% block content %}
-  <h2>Criar Reserva</h2>
-  {% if mensagem %}
-    <p>{{ mensagem }}</p>
-  {% endif %}
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Criar Reserva</button>
-  </form>
+  {% include 'header.html' %}
+
+  <main style="position: absolute; width: 1092px; height: 550px; left: 242px; top: 142px; background: #C93441;">
+    <!-- Conteúdo do main -->
+    <div style="position: absolute; width: 483px; height: 475px; left: 64px; top: 45px; background: #0d9d36;">
+      <!-- Conteúdo da div -->
+      <h2>RESERVE JÁ !</h2>
+    {% if mensagem %}
+      <p>{{ mensagem }}</p>
+    {% endif %}
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Criar Reserva</button>
+    </form>
+    </div>
+  </main>
+
+  
 {% endblock %}
+
