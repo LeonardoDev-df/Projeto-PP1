@@ -2,6 +2,18 @@
 
 SISTEMAS DE RESERVAS PARA UM RESTAURANTE
 
+#layout figma link 
+https://www.figma.com/file/MdTXQhYzpyj1dTWmPQRtRe/Telas-Programa%C3%A7%C3%A3o-para-Internet-1?type=design&node-id=0-1
+_____________________________________________________________________________
+#modelo banco de daos
+
+_____________________________________________________________________________]
+
+#regras de negócio
+* limte de mesas disponíveis 20
+* aviso quando estiver lotado ou sem mesas disponíveis
+* horários de reservas proibido entre 00:00 e 10:00 manhã
+_____________________________________________________________________________
 https://github.com/LeonardoDev-df/Projeto-PP1/assets/69646199/8f5a5ad2-4692-4750-bbb7-d40ca9e11d98
 
 #entrar na pasta
