@@ -1,0 +1,23 @@
+.form-field {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+
+  .flex-container {
+    display: flex;
+  }
+  
+  .flex-item {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .flex-container {
+    display: flex;
+  }
+  
+  .flex-item {
+    margin-right: 10px;
+  }
+  

@@ -1,0 +1,22 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+
+{% for field in form %}
+  <div class="form-field">
+    {{ field.errors }}
+    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+    {{ field }}
+  </div>
+
+  <div class="flex-container">
+    <div class="flex-item">
+      {{ form.numero_pessoas.label_tag }}
+      {{ form.numero_pessoas }}
+    </div>
+    <div class="flex-item">
+      {{ form.horario.label_tag }}
+      {{ form.horario }}
+    </div>
+  </div>
+  
+{% endfor %}

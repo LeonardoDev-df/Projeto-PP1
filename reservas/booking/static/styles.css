@@ -1,4 +1,98 @@
-/* styles.css */
+@media (min-width: 1200px) {
+  
+  .main-container {
+    position: absolute; 
+    width: 992px; 
+    height: 550px; 
+    left: 282px; 
+    top: 142px; 
+    background: #F6F6F6; 
+    border: 2px solid #BF0000;
+    border-radius: 10px;
+  }
+  
+  .image-container {
+    position: absolute;
+    width: 100%;
+    max-width: 483px;
+    height: 475px;
+    left: 72%;
+    transform: translateX(-50%);
+    top: 45px;
+    background: #F6F6F6;
+  }
+  
+  .flex-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  
+  .content-container {
+    position: absolute;
+    width: 100%;
+    max-width: 483px;
+    height: 275px;
+    left: 30%;
+    transform: translateX(-50%);
+    top: 45px;
+    background: #F6F6F6;
+  }
+    
+    .flex-container {
+      display: flex;
+      }
+  
+      .flex-item {
+        flex: 1;
+        padding-inline: 20px;
+        padding-top: 9px;
+      }
+      .meu-formulario p {
+        margin-bottom: 10px;
+        padding-top: 23px;
+      }
+      .meu-formulario {
+        width: 65%;
+        margin-left: 71px;
+        padding-top: 9px;
+        
+      }
+  
+      .form-group{
+        padding-top: 13px;
+      }
+      .meu-formulario label {
+        font-weight: bold;
+        margin-bottom: 10px;
+        
+      }
+  
+      .meu-formulario input,
+      .meu-formulario textarea {
+        width: 100%;
+        padding: 15px;
+        border-radius: 5px;
+        border: 1px solid #c80e0e;
+        padding-bottom: 15px;
+        
+      }
+  
+      button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    background-color: #FEAC88;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 16px;
+    margin-left: 1px;
+  }
+  
+  }
+
+
 
 
 /* Estilize o contêiner principal */
