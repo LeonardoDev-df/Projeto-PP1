@@ -179,6 +179,32 @@ body {
 
 }
 
+.alert {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.alert-success {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+.alert-danger {
+    background-color: #f2dede;
+    color: #a94442;
+}
+
+.alert-warning {
+    background-color: #fcf8e3;
+    color: #8a6d3b;
+}
+
+.alert-info {
+    background-color: #d9edf7;
+    color: #31708f;
+}
+
+
 
   </style>
 
@@ -187,9 +213,16 @@ body {
     <div class="content-container" >
       <!-- Conteúdo da div -->
       <h2 class="usa">RESERVE JÁ !</h2>
-    {% if mensagem %}
-      <p>{{ mensagem }}</p>
-    {% endif %}
+      {% for message in messages %}
+          <div class="alert {% if message.tags == messages.SUCCESS %}alert-success{% endif %}
+                      {% if message.tags == messages.ERROR %}alert-danger{% endif %}
+                      {% if message.tags == messages.WARNING %}alert-warning{% endif %}
+                      {% if message.tags == messages.INFO %}alert-info{% endif %}">
+              {{ message }}
+          </div>
+      {% endfor %}
+
+  
    
 
       <form method="post" class="meu-formulario">

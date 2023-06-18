@@ -1,87 +1,431 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-  <h2>Lista de Reservas</h2>
-  
-  <style>
-        /* Estilos para centralizar o conteúdo */
-        body{
-          width: 150%;
-        }
-       
-        .content-container {
-            display: flex;
-          
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
+{% include 'header.html' %}
 
-        /* Estilos para a tabela de listagem de reservas */
-        table {
-            width: 170%;
-            border-collapse: collapse;
-            margin-bottom: 50px;
-        }
+<style>
+  /* Estilos para centralizar o conteúdo */
+  body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
 
-        /* Estilos para os links de edição e deleção */
-        a.edit-link,
-        a.delete-link {
-            display: inline-block;
-            padding: 5px 10px;
-            background-color: #2196f3;
-            color: white;
-            text-decoration: none;
-            margin-right: 10px;
-        }
-    </style>
+  h2 {
+    position: relative;
+    font-family: Georgia, serif;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 15px;
+    color: #c80e0e;
+  }
+
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+     padding: 0 15px; 
+  }
+
+  /* Estilos para a tabela de listagem de reservas */
+  table {
+    width: 110%;
+    border-collapse: collapse;
+    margin-bottom: 50px;
+  }
+
+  /* Estilos para os links de edição e deleção */
+  .lis{
+    display: inline-block;
+    padding: 1px ;
+    background-color: ;
+    color: #2196f3;
+    text-decoration: none;
+    margin-right: 10px;
+  }
+
+  .main-container {
+    position: absolute;
+    width: 1422px;
+    height: 530px;
+    left: 62px;
+    top: 155px;
+    background: #F6F6F6;
+    border: 2px solid #BF0000;
+    border-radius: 10px;
+  }
+
+  .table {
+    box-sizing: border-box;
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    border-collapse: collapse;
+    width: 92%;
+    position: absolute;
+    height: 400px;
+    left: 58px;
+    top: 65px;
+    background: #FFFFFF;
+    border: 1px solid  #BF0000;
+    border-radius: 4px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+  }
+
+  .table thead tr,
+  .table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+   
+  }
+
+  .table th,
+  .table td {
+    text-align: center;
+    padding: 8px;
+    padding-left: 20px;
+    border-bottom: 1px solid #ddd;
     
+  }
 
-    <div class="content-container">
-      <a href="{% url 'criar_reserva' %}">Criar Nova Reserva</a> <!-- Link para criar nova reserva -->
+  .table th {
+    background-color: #F59797;;
+    vertical-align: middle;
+    color: white;
+  }
 
-      {% if reservas %}
-        <table>
-          <thead>
-            <tr>
-              <th>Data</th>
-              <th>Horário</th>
-              <th>Status</th>
-              <th>Nome do Cliente</th>
-              <th>Ação</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for reserva in reservas %}
-              <tr>
-                <td>{{ reserva.data }}</td>
-                <td>{{ reserva.horario }}</td>
-                <td>{{ reserva.status }}</td>
-                <td>{{ reserva.nome }}</td>
-                <td>
-                  <a href="{% url 'confirmar_chegada' reserva.id %}"  class="edit-link">Confirmar Chegada</a>
-                </td>
-                <td>
-                  <a href="{% url 'cancelar_reserva' reserva.id %}" class="edit-link">Cancelar Reserva</a>
-                </td>
-               
+  .table td {
+    vertical-align: middle;
+  }
 
-                <td>
-                  <a href="{% url 'editar_reserva' reserva.pk %}" class="edit-link">Editar</a>
-                  <a href="{% url 'deletar_reserva' reserva.pk %}" class="delete-link">Deletar</a>
-              </td>
-              </tr>
-            {% empty %}
-              <tr>
-                <td colspan="5">Nenhuma reserva encontrada.</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      {% else %}
-        <p>Nenhuma reserva encontrada.</p>
-      {% endif %}
-    </div>
+  .table a {
+    margin-right: 5px;
+  }
+
+  .cri{
+    color: white;
+    font-family: "Gill Sans", sans-serif;
+    font-size: 20px;
+    text-decoration: none ;
+  }
+
+  .cris{
+    
+  position: absolute;
+  width: 20%;
+  padding: 12px;
+  background-color: #FEAC88;
+  color: #fff !important;
+  border: none;
+  margin-top: 475px !important;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 16px;
+  margin-left: 1px;
+}
+.agei{
+  width: 65px;
+
+}
+
+.agei th {
+  background-color: red !important;
+    vertical-align: middle;
+    color: white;
+}
+
+.img{
+  width: 27px;
+              height: 23px;
+              left: 1072px;
+              top: 546px;
+}
+
+@media screen and (max-width: 767px) {
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  h2 {
+    font-family: Georgia, serif;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 15px;
+    color: #c80e0e;
+  }
+
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 15px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 50px;
+  }
+
+  .lis {
+    display: inline-block;
+    padding: 1px;
+    color: #2196f3;
+    text-decoration: none;
+    margin-right: 10px;
+  }
+
+  .main-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background: #f6f6f6;
+    border: 2px solid #bf0000;
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .table {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    border-collapse: collapse;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #bf0000;
+    border-radius: 4px;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .table thead tr,
+  .table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .table th,
+  .table td {
+    text-align: center;
+    padding: 8px;
+    padding-left: 20px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .table th {
+    background-color: #f59797;
+    color: white;
+  }
+
+  .table td {
+    vertical-align: middle;
+  }
+
+  .table a {
+    margin-right: 5px;
+  }
+
+  .cri {
+  color: white;
+  font-family: "Gill Sans", sans-serif;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.cris {
+  width: 60%;
+  padding: 12px;
+  background-color: #feac88;
+  color: #fff !important;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.agei {
+  width: 65px;
+}
+
+.agei th {
+  background-color: red !important;
+  color: white;
+}
+
+.img {
+  width: 27px;
+  height: 23px;
+}
+
+@media screen and (max-width: 767px) {
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  h2 {
+    font-family: Georgia, serif;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 15px;
+    color: #c80e0e;
+  }
+
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 15px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 50px;
+  }
+
+  .lis {
+    display: inline-block;
+    padding: 1px;
+    color: #2196f3;
+    text-decoration: none;
+    margin-right: 10px;
+  }
+
+  .main-container {
+    position: relative;
+    width: 60%;
+    min-height: 100vh;
+    background: #f6f6f6;
+    border: 2px solid #bf0000;
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .table {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    border-collapse: collapse;
+    width: 60%;
+    background: #ffffff;
+    border: 1px solid #bf0000;
+    border-radius: 4px;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .table thead tr,
+  .table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .table th,
+  .table td {
+    text-align: center;
+    padding: 8px;
+    padding-left: 20px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .table th {
+    background-color: #f59797;
+    color: white;
+  }
+
+  .table td {
+    vertical-align: middle;
+  }
+
+  .table a {
+    margin-right: 5px;
+  }
+}
+
+
+} 
+</style>
+
+<main class="main-container">
+  <div class="content-container">
+    <h2>Lista de Reservas</h2>
+    
+    {% if reservas %}
+    <table class="table">
+      <thead class="num">
+        <tr>
+          <th>Data</th>
+          <th>Horário</th>
+          <th>Status</th>
+          <th>Nome do Cliente</th>
+          <th class="agei">Confirmar</th>
+          <th class="agei">Cancelar</th>
+          <th class="agei">Editar</th>
+          <th class="agei">Deletar</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for reserva in reservas %}
+        <tr>
+          <td>{{ reserva.data }}</td>
+          <td>{{ reserva.horario }}</td>
+          <td>{{ reserva.status }}</td>
+          <td class="name">{{ reserva.nome }}</td>
+          <td class="agei">
+            <a class="lis" href="{% url 'confirmar_chegada' reserva.id %}">
+              <img class="img" src="{% static 'images/check.png' %}" alt="Logo do Meu Restaurante">
+            </a>
+          </td>
+          <td class="agei">
+            <a class="lis" href="{% url 'cancelar_reserva' reserva.id %}">
+              <img class="img" src="{% static 'images/close.png' %}" alt="Logo do Meu Restaurante">
+            </a>
+          </td>
+            
+          <td class="agei">
+            <a class="lis" href="{% url 'editar_reserva' reserva.pk %}"> 
+              <img class="img" src="{% static 'images/edit.png' %}" alt="Logo do Meu Restaurante">
+            </a>
+          </td>
+          <td class="agei">
+            <a class="lis" href="{% url 'deletar_reserva' reserva.pk %}">
+              <img style="width: 20px; height: 20px;" src="{% static 'images/dele.png' %}" alt="Logo do Meu Restaurante">
+            </a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="5">Nenhuma reserva encontrada.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <button class="cris">
+        <a class="cri" href="{% url 'criar_reserva' %}">Criar Nova Reserva</a>
+    </button>
+    
+    {% else %}
+    <p>Nenhuma reserva encontrada.</p>
+    {% endif %}
+  </div>
+</main>
+
 {% endblock %}
+
 
 

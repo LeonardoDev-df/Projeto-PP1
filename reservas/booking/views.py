@@ -3,11 +3,13 @@ from django.db.models import Sum  # Importe o Sum do Django models
 from .models import Reserva
 from .forms import ReservaForm
 from datetime import datetime, time
+from django.contrib import messages
 
 
 def listar_reservas(request):
     reservas = Reserva.objects.all()
     return render(request, "listar_reservas.html", {"reservas": reservas})
+
 
 
 def criar_reserva(request):
@@ -18,11 +20,12 @@ def criar_reserva(request):
 
             # Verificar regras de negócio
             if reserva.horario < time(11, 0):
-                mensagem = "Desculpe, não é possível fazer reservas antes das 11h."
+                #mensagem = "Desculpe, não é possível fazer reservas antes das 11h."
+                messages.add_message(request, messages.ERROR, 'Operação realizada com sucesso.')
                 return render(
                     request,
                     "booking/criar_reserva.html",
-                    {"form": form, "mensagem": mensagem},
+                    {"form": form, "mensagem": messages},
                 )
 
             reservas_no_horario = Reserva.objects.filter(
@@ -32,7 +35,7 @@ def criar_reserva(request):
                 status='confirmada'
             ).aggregate(total_mesas_reservadas=Sum('mesas_reservadas'))['total_mesas_reservadas'] or 0
             
-            mesas_disponiveis = 20 - mesas_reservadas
+            mesas_disponiveis = 5 - mesas_reservadas
             
             if mesas_disponiveis < reserva.mesas_reservadas:
                 mensagem = (
@@ -89,7 +92,7 @@ def editar_reserva(request, reserva_id):
                 status='confirmada'
             ).aggregate(total_mesas_reservadas=Sum('mesas_reservadas'))['total_mesas_reservadas'] or 0
             
-            mesas_disponiveis = 20 - mesas_reservadas
+            mesas_disponiveis = 5 - mesas_reservadas
             
             if mesas_disponiveis < reserva.mesas_reservadas:
                 mensagem = (
