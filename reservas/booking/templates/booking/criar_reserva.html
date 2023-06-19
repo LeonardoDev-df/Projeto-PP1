@@ -180,8 +180,14 @@ body {
 }
 
 .alert {
+  width: 620px;
+    border: 1px solid;
+    position: absolute;
+    color: #a94442;
     padding: 10px;
     margin-bottom: 10px;
+    margin-top: -108px;
+    margin-left: 120px;
 }
 
 .alert-success {
@@ -222,11 +228,15 @@ body {
           </div>
       {% endfor %}
 
+      
+
   
    
 
       <form method="post" class="meu-formulario">
         {% csrf_token %}
+
+        
 
         <div class="form-group">
           <label for="{{ form.data.id_for_label }}">Data:</label>

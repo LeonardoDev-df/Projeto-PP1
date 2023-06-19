@@ -20,12 +20,11 @@ def criar_reserva(request):
 
             # Verificar regras de negócio
             if reserva.horario < time(11, 0):
-                #mensagem = "Desculpe, não é possível fazer reservas antes das 11h."
-                messages.add_message(request, messages.ERROR, 'Operação realizada com sucesso.')
+                messages.add_message(request, messages.ERROR, "Desculpe, não é possível fazer reservas antes das 11h.")
                 return render(
                     request,
                     "booking/criar_reserva.html",
-                    {"form": form, "mensagem": messages},
+                    {"form": form, "messages": messages.get_messages(request)},
                 )
 
             reservas_no_horario = Reserva.objects.filter(
@@ -35,25 +34,24 @@ def criar_reserva(request):
                 status='confirmada'
             ).aggregate(total_mesas_reservadas=Sum('mesas_reservadas'))['total_mesas_reservadas'] or 0
             
-            mesas_disponiveis = 5 - mesas_reservadas
+            mesas_disponiveis = 5
+            mesas_disponiveis = mesas_disponiveis - mesas_reservadas
             
             if mesas_disponiveis < reserva.mesas_reservadas:
-                mensagem = (
-                    'Desculpe, o restaurante está lotado. Não é possível fazer mais reservas de mesa.'
-                )
+                #mensagem = 'Desculpe, o restaurante está lotado. Não é possível fazer mais reservas de mesa.'
+                messages.add_message(request, messages.ERROR, 'Desculpe, o restaurante está lotado. Não é possível fazer mais reservas de mesa.')
                 return render(
                     request,
                     "booking/criar_reserva.html",
-                    {"form": form, "mensagem": mensagem},
+                    {"form": form, "messages": messages.get_messages(request)},
                 )
-
 
             reserva.save()
             return redirect("listar_reservas")
     else:
         form = ReservaForm()
 
-    return render(request, "booking/criar_reserva.html", {"form": form})
+    return render(request, "booking/criar_reserva.html", {"form": form, "messages": messages.get_messages(request)})
 
 
 def confirmar_chegada(request, reserva_id):
