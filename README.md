@@ -13,6 +13,7 @@ _____________________________________________________________________________
 * limte de mesas disponíveis 20
 * aviso quando estiver lotado ou sem mesas disponíveis
 * horários de reservas proibido entre 00:00 e 10:00 manhã
+* só pode reservar 3 dias de antecedência da data atual
 _____________________________________________________________________________
 
 
