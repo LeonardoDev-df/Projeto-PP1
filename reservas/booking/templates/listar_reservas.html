@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+
 {% load static %}
 {% block content %}
 {% include 'header.html' %}
@@ -6,9 +6,23 @@
 <style>
   /* Estilos para centralizar o conteúdo */
   body {
-    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
     margin: 0;
-    padding: 0;
+  }
+
+  .anuncio{
+    position: relative;
+    font-family: Georgia, serif;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 165px;
+    color: #c80e0e;
+    font-size: 40px;
+    text-align: center;
+    margin-left: 155px;
   }
 
   h2 {
@@ -424,7 +438,11 @@
     </button>
     
     {% else %}
-    <p>Nenhuma reserva encontrada.</p>
+    <p class="anuncio">Nenhuma reserva encontrada.</p>
+
+    <button class="cris">
+      <a class="cri" href="{% url 'criar_reserva' %}">Criar Nova Reserva</a>
+    </button>
     {% endif %}
   </div>
 </main>

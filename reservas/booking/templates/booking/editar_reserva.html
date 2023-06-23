@@ -1,11 +1,285 @@
+{% load static %}
 {% block content %}
-  <h2>Editar Reserva</h2>
-  {% if mensagem %}
-    <p>{{ mensagem }}</p>
-  {% endif %}
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Salvar</button>
-  </form>
+  {% include 'header.html' %}
+
+
+  <style>
+   
+/* Estilos base */
+body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+   
+    /* Estilos para telas menores */
+    @media screen and (max-width: 767px) {
+      .meu-formulario input,
+      .meu-formulario textarea {
+      width: 100%;
+      padding: 15px;
+      border-radius: 5px;
+      border: 1px solid #c80e0e;
+      padding-bottom: 15px;
+      
+      }
+
+      .meu-formulario p {
+      margin-bottom: 10px;
+      padding-top: 23px;
+    }
+    .meu-formulario {
+      width: 71%;
+      margin-left: 71px;
+      padding-top: 9px;
+      
+    }
+
+     h2{
+     position: relative;
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+        margin-left: 154px;
+        margin-top: 30px;
+      }
+     
+      .main-container {
+        padding: 10px;
+      }
+      .content-container {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+      .image-container {
+        width: 100%;
+      }
+      .flex-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      button[type="submit"] {
+  width: 100%;
+  padding: 15px;
+  background-color: #FEAC88;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 16px;
+  margin-left: 1px;
+}
+
+.img{
+  margin-left: 15px;
+      width: 433px;
+      height: 409px;
+ 
+  }
+    }
+@media (min-width: 1200px) {
+  
+
+  .img{
+    position: absolute;
+      width: 353px;
+      height: 409px;
+      left: 94px;
+      top: 45px;
+  }
+.main-container {
+  position: absolute; 
+  width: 992px; 
+  height: 530px; 
+  left: 282px; 
+  top: 145px; 
+  background: #F6F6F6; 
+  border: 2px solid #BF0000;
+  border-radius: 10px;
+}
+
+.image-container {
+  position: absolute;
+  width: 100%;
+  max-width: 483px;
+  height: 475px;
+  left: 72%;
+  transform: translateX(-50%);
+  top: 45px;
+  background: #F6F6F6;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.content-container {
+  position: absolute;
+  width: 100%;
+  max-width: 483px;
+  height: 275px;
+  left: 30%;
+  transform: translateX(-50%);
+  top: 45px;
+  background: #F6F6F6;
+}
+  
+  .flex-container {
+    display: flex;
+    }
+
+    .flex-item {
+      flex: 1;
+      padding-inline: 10px;
+      padding-top: 9px;
+    }
+    .meu-formulario p {
+      margin-bottom: 10px;
+      padding-top: 23px;
+    }
+    .meu-formulario {
+      width: 71%;
+      margin-left: 71px;
+      padding-top: 9px;
+      
+    }
+
+    .form-group{
+      padding-top: 13px;
+    }
+    .meu-formulario label {
+      font-weight: bold;
+      margin-bottom: 10px;
+      
+    }
+
+    .meu-formulario input,
+    .meu-formulario textarea {
+      width: 100%;
+      padding: 15px;
+      border-radius: 5px;
+      border: 1px solid #c80e0e;
+      padding-bottom: 15px;
+      
+    }
+
+    button[type="submit"] {
+  width: 100%;
+  padding: 15px;
+  background-color: #FEAC88;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 16px;
+  margin-left: 1px;
+}
+
+}
+
+.alert {
+  width: 620px;
+    border: 1px solid;
+    position: absolute;
+    color: #a94442;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-top: -108px;
+    margin-left: 120px;
+}
+
+.alert-success {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+.alert-danger {
+    background-color: #f2dede;
+    color: #a94442;
+}
+
+.alert-warning {
+    background-color: #fcf8e3;
+    color: #8a6d3b;
+}
+
+.alert-info {
+    background-color: #d9edf7;
+    color: #31708f;
+}
+
+
+
+  </style>
+
+  <main class="main-container" style="">
+    <!-- Conteúdo do main -->
+    <div class="content-container" >
+      <!-- Conteúdo da div -->
+      <h2 class="usa">EDITANDO A RESERVA</h2>
+      {% for message in messages %}
+          <div class="alert {% if message.tags == messages.SUCCESS %}alert-success{% endif %}
+                      {% if message.tags == messages.ERROR %}alert-danger{% endif %}
+                      {% if message.tags == messages.WARNING %}alert-warning{% endif %}
+                      {% if message.tags == messages.INFO %}alert-info{% endif %}">
+              {{ message }}
+          </div>
+      {% endfor %}
+
+      
+
+  
+   
+
+      <form method="post" class="meu-formulario">
+        {% csrf_token %}
+
+        
+
+        <div class="form-group">
+          <label for="{{ form.data.id_for_label }}">Data:</label>
+          {{ form.data }}
+        </div>
+    
+
+        <div class="form-group">
+          <label for="{{ form.nome.id_for_label }}">Nome do Cliente:</label>
+          {{ form.nome }}
+        </div>
+    
+        <div class="form-group">
+          <label for="{{ form.email.id_for_label }}">E-mail do Cliente:</label>
+          {{ form.email }}
+        </div>
+    
+        <div class="flex-container">
+          <div class="flex-item">
+            {{ form.numero_pessoas.label_tag }}
+            {{ form.numero_pessoas }}
+          </div>
+          <div class="flex-item">
+            {{ form.horario.label_tag }}
+            {{ form.horario }}
+          </div>
+        </div>
+    
+        <button type="submit">Reservar</button>
+      </form>
+      
+
+    </div>
+    <div class="image-container">
+      <!-- Conteúdo da div -->
+      <img class="img" src="{% static 'images/Apresentação.png' %}" alt="Logo do Meu Restaurante" 
+      style=
+      "
+     
+      ">
+    </div>
+  </main>
+
+  
 {% endblock %}

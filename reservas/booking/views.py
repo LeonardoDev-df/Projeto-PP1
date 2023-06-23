@@ -61,7 +61,7 @@ def criar_reserva(request):
                 )
 
             # Mensagem de sucesso
-            messages.add_message(request, messages.SUCCESS, "Reserva criada com sucesso!")
+            #messages.add_message(request, messages.SUCCESS, "Reserva criada com sucesso!")
 
             reserva.save()
             return redirect("listar_reservas")
