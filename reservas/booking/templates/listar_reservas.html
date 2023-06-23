@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 {% include 'header.html' %}
-
+{% load i18n %}
 <style>
   /* Estilos para centralizar o conteúdo */
   body {
@@ -382,7 +382,11 @@
       <tbody>
         {% for reserva in reservas %}
         <tr>
-          <td>{{ reserva.data }}</td>
+          {% load i18n %}
+          <td>      
+            {{ reserva.data|date:"d /F /Y" }}
+            <!-- Restante do código para exibir outras informações da reserva -->    
+        </td>
           <td>{{ reserva.horario }}</td>
           <td>{{ reserva.status }}</td>
           <td class="name">{{ reserva.nome }}</td>

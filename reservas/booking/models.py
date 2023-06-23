@@ -37,4 +37,5 @@ class Reserva(models.Model):
     
     def __str__(self):
         return f'Reserva para {self.nome} em {self.data} às {self.horario}'
+
     objects = models.Manager()
